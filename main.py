@@ -30,23 +30,23 @@ def main():
         
         elif choice == "2":
             username, password = menu.get_user_credentials()
-
-            # Authenticate Nurse
-            if user_dl.authenticate_predefined_role(username, password, "nurses"):
-                menu.display_message(f"Welcome back, Nurse {username}!")
+            if user_logic.sign_in(username, password):
+                menu.display_message(f"Welcome back, {username}!")
                 while True:
-                    nurse_choice = menu.nurse_menu()
-                    if nurse_choice == "1":
-                        print("Assisting doctor...")
-                    elif nurse_choice == "2":
-                        print("Checking vitals...")
-                    elif nurse_choice == "3":
-                        print("Administering medicine...")
-                    elif nurse_choice == "4":
+                    patient_choice = menu.patient_menu()
+                    if patient_choice == "1":
+                        doctors = doctor_dl.get_doctors()
+                        menu.display_doctors(doctors)
+                    elif patient_choice == "2":
+                        patient.buy_medicine(medicine_dl)
+                    elif patient_choice == "3":
+                        patient.view_bill()
+                    elif patient_choice == "4":
                         print("Logging out...")
                         break
                     else:
-                        menu.display_message("Invalid choice. Try again.")
+                        print("Invalid choice. Please try again.")
+
 
             # Authenticate Doctor
             elif user_dl.authenticate_predefined_role(username, password, "doctors"):
@@ -81,26 +81,21 @@ def main():
                     else:
                         menu.display_message("Invalid choice. Try again.")
 
-
-            # Authenticate General User (Patient)
-            elif user_logic.sign_in(username, password):
-                menu.display_message(f"Welcome back, {username}!")
+            elif user_dl.authenticate_predefined_role(username, password, "nurses"):
+                menu.display_message(f"Welcome back, Nurse {username}!")
                 while True:
-                    patient_choice = menu.patient_menu()
-                    if patient_choice == "1":
-                        doctors = doctor_dl.get_doctors()
-                        menu.display_doctors(doctors)
-                    elif patient_choice == "2":
-                        patient.buy_medicine(medicine_dl)
-                    elif patient_choice == "3":
-                        patient.view_bill()
-                    elif patient_choice == "4":
+                    nurse_choice = menu.nurse_menu()
+                    if nurse_choice == "1":
+                        print("Assisting doctor...")
+                    elif nurse_choice == "2":
+                        print("Checking vitals...")
+                    elif nurse_choice == "3":
+                        print("Administering medicine...")
+                    elif nurse_choice == "4":
                         print("Logging out...")
                         break
                     else:
-                        print("Invalid choice. Please try again.")
-
-            # If none of the roles match
+                        menu.display_message("Invalid choice. Try again.")    
             else:
                 menu.display_message("Invalid username or password. Please try again.")
 

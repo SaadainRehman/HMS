@@ -18,10 +18,7 @@ class UserDL:
     
     def authenticate_predefined_role(self, username, password, role):
         role_dict = self.predefined_roles.get(role)
-        # print(f"Authenticating: role={role}, username={username}, password={password}")
-        # print(f"Role data: {role_dict}")
         if role_dict:
-            # print(f"Password match: {role_dict.get(username) == password}")
             return role_dict.get(username) == password
         return False
 
