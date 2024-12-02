@@ -1,5 +1,5 @@
 class Patient:
-    def __init__(self, name, age, phone, cnic, address, department):
+    def __init__(self, name=None, age=None, phone=None, cnic=None, address=None, department=None):
         self._name = name
         self._age = age
         self._phone = phone
@@ -42,3 +42,15 @@ class Patient:
 
     def set_department(self, department):
         self._department = department
+
+    def view_doctors(self):
+        print("Viewing available doctors...")
+
+    def buy_medicine(self, medicine_dl):
+        medicines = medicine_dl.get_all_medicines()
+        print("\n--- Available Medicines ---")
+        for medicine in medicines:
+            print(f"Name: {medicine.get_name()}, Price: {medicine.get_price()}, Description: {medicine.get_description()}")
+
+    def view_bill(self):
+        print("Viewing bill...")

@@ -2,7 +2,7 @@ class Menu:
     def get_user_credentials(self):
         username = input("Enter username: ")
         password = input("Enter password: ")
-        return username, password
+        return username, password 
 
     def display_message(self, message):
         print(message)
@@ -14,16 +14,14 @@ class Menu:
         print("3. Exit")
         choice = input("Enter your choice: ")
         return choice
-
-    # def patient_menu(self):
-    #     print("\n--- Patient Management Menu ---")
-    #     print("1. Add Patient")
-    #     print("2. View All Patients")
-    #     print("3. Update Patient Information")
-    #     print("4. Delete Patient")
-    #     print("5. Log Out")
-    #     choice = input("Enter your choice: ")
-    #     return choice
+    
+    def display_doctors(self, doctors):
+        if not doctors:
+            print("No doctors are available at the moment.")
+        else:
+            print("\n--- Available Doctors ---")
+            for doctor in doctors:
+                print(doctor)
 
     def patient_menu(self):
         print("\n--- Patient Management Menu ---")
@@ -50,3 +48,21 @@ class Menu:
             print("\n--- Patients List ---")
             for patient in patients:
                 print(f"Name: {patient.get_name()}, Age: {patient.get_age()}, Phone: {patient.get_phone()}")
+
+    def doctor_menu(self):
+        print("\n--- Doctor Management Menu ---")
+        print("1. View Assigned Patients")
+        print("2. Update Patient Records")
+        print("3. View Schedule")
+        print("4. Log Out")
+        choice = input("Enter your choice: ")
+        return choice
+
+
+    def display_doctors(self, doctors):
+        if not doctors:
+            print("No doctors are available at the moment.")
+        else:
+            print("\n--- Available Doctors ---")
+            for doctor in doctors:
+                print(doctor)
