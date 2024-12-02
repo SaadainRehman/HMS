@@ -74,3 +74,10 @@ class Menu:
         print("3. Administer Medicine")
         print("4. Log Out")
         return input("Enter your choice: ")
+    
+    def pharmacist_menu(self):
+        print("\n--- Pharmacist Menu ---")
+        print("1. View Medicine Stock")
+        print("2. Dispense Medicine")
+        print("3. Log Out")
+        return input("Enter your choice: ")

@@ -4,7 +4,7 @@ class UserDL:
         self.predefined_roles = {
             "doctors": {"Ali Naeem": "789789", "Saqlain": "786786"},
             "nurses": {"shaheer": "6969", "hassaan": "9999"},
-            "pharmacists": {"pharma1": "pharmapass1", "pharma2": "pharmapass2"},
+            "pharmacists": {"muneeb": "pharma", "hassan": "pharma2"},
         }
 
     def add_user(self, user):
@@ -16,19 +16,12 @@ class UserDL:
                 return user
         return None
     
-    # def authenticate_predefined_role(self, username, password, role):
-    #     # Check if the role exists in predefined roles
-    #     role_dict = self.predefined_roles.get(role)
-    #     if role_dict:
-    #         return role_dict.get(username) == password
-    #     return False
-
     def authenticate_predefined_role(self, username, password, role):
         role_dict = self.predefined_roles.get(role)
-        print(f"Authenticating: role={role}, username={username}, password={password}")
-        print(f"Role data: {role_dict}")
+        # print(f"Authenticating: role={role}, username={username}, password={password}")
+        # print(f"Role data: {role_dict}")
         if role_dict:
-            print(f"Password match: {role_dict.get(username) == password}")
+            # print(f"Password match: {role_dict.get(username) == password}")
             return role_dict.get(username) == password
         return False
 
