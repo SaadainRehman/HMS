@@ -6,6 +6,7 @@ from DL.DoctorDL import DoctorDL
 from BL.Doctor import Doctor
 from DL.MedicineDL import MedicineDL
 from BL.patient import Patient
+from DL.Nurse import NurseDL
 
 def main():
     user_dl = UserDL()
@@ -14,6 +15,7 @@ def main():
     doctor_dl = DoctorDL()
     medicine_dl = MedicineDL()
     patient = Patient()
+    nurse_dl = NurseDL()
 
     def initialize_doctors(doctor_dl):
         doctor_dl.add_doctor(
@@ -29,7 +31,32 @@ def main():
             department="Cardiology"
         )
 
+    def initialize_nurses(nurse_dl):
+        nurse_dl.add_nurse(
+        name="John Doe",
+        shift="Morning",
+        address="456 Elm St.",
+        phone="987654321",
+        salary="50000",
+        cnic="54321-9876543-1",
+        specialization="General Care",
+        department="Emergency"
+    )
+    nurse_dl.add_nurse(
+        name="Jane Doe",
+        shift="Evening",
+        address="789 Oak St.",
+        phone="567890123",
+        salary="55000",
+        cnic="98765-4321098-7",
+        specialization="Pediatrics",
+        department="Pediatrics"
+    )
+
+
     initialize_doctors(doctor_dl)
+    initialize_nurses(nurse_dl)
+
 
     while True:
         choice = menu.main_menu()
@@ -44,8 +71,25 @@ def main():
 
         elif choice == "2":
             username, password = menu.get_user_credentials()
+            if user_dl.authenticate_predefined_role(username, password, "nurses"):
+                menu.display_message(f"Welcome back, Nurse {username}!")
+                while True:
+                    nurse_choice = menu.nurse_menu()
+                    if nurse_choice == "1":
+                        print("Assisting doctor...")
+                        # Implement functionality here
+                    elif nurse_choice == "2":
+                        print("Checking vitals...")
+                        # Implement functionality here
+                    elif nurse_choice == "3":
+                        print("Administering medicine...")
+                        # Implement functionality here
+                    elif nurse_choice == "4":
+                        print("Logging out...")
+                        break
+                    else:
+                        menu.display_message("Invalid choice. Try again.")
 
-            # Check if the user is a predefined doctor
             if user_dl.authenticate_predefined_role(username, password, "doctors"):
                 menu.display_message(f"Welcome back, Dr. {username}!")
                 while True:
@@ -61,9 +105,8 @@ def main():
                         print("Logging Out")
                         break
                     else:
-                        menu.display_message("Invalid choice. Try again.")
-
-            # Handle regular sign-in logic for other users
+                        menu.display_message("Invalid choice. Try again.")    
+        
             else:
                 user = user_logic.sign_in(username, password)
                 if user:

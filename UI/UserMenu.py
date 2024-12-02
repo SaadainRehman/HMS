@@ -66,3 +66,11 @@ class Menu:
             print("\n--- Available Doctors ---")
             for doctor in doctors:
                 print(doctor)
+
+    def nurse_menu(self):
+        print("\n--- Nurse Menu ---")
+        print("1. Assist Doctor")
+        print("2. Check Vitals")
+        print("3. Administer Medicine")
+        print("4. Log Out")
+        return input("Enter your choice: ")
