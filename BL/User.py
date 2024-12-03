@@ -25,12 +25,17 @@ class UserManager:
         self.user_dl = user_dl
 
     def sign_up(self, username, password):
-        if self.user_dl.get_user(username) is None:
-            # new_user.get_role() = "patient"
-            new_user = User(username, password , role="patient")
-            self.user_dl.add_user(new_user)
-            return True
-        return False
+        if len(password) == 5 and password.isdigit():
+            if self.user_dl.get_user(username) is None:
+                new_user = User(username, password, role="patient")
+                self.user_dl.add_user(new_user)
+                return True
+            else:
+                print("Username already exists.")
+                return False
+        else:
+            print("Password must be exactly 5 digits.")
+            return False
 
     def sign_in(self, username, password):
         user = self.user_dl.get_user(username)

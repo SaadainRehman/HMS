@@ -70,8 +70,8 @@ class Menu:
     def nurse_menu(self):
         print("\n--- Nurse Menu ---")
         print("1. Assist Doctor")
-        print("2. Check Vitals")
-        print("3. Administer Medicine")
+        print("2. View Tasks : ")
+        print("3. Perform Tasks : ")
         print("4. Log Out")
         return input("Enter your choice: ")
     
@@ -81,3 +81,34 @@ class Menu:
         print("2. Dispense Medicine")
         print("3. Log Out")
         return input("Enter your choice: ")
+    
+    def get_patient_record_update(self):
+        try:
+            patient_index = int(input("Enter patient index to update: ")) - 1
+            updated_condition = input("Enter updated condition: ")
+            return patient_index, updated_condition
+        except ValueError:
+            print("Invalid input. Please enter numeric values for the patient index.")
+            return -1, None
+        
+    def get_dispense_medicine_details(self):
+        medicine_name = input("Enter the name of the medicine: ")
+        try:
+            quantity = int(input("Enter the quantity to dispense: "))
+            return medicine_name, quantity
+        except ValueError:
+            print("Invalid input. Please enter a valid quantity as a number.")
+            return None, None
+        
+    def get_medicine_purchase_details(self, medicines):
+        print("\n--- Available Medicines ---")
+        for idx, medicine in enumerate(medicines, start=1):
+            print(f"{idx}. Name: {medicine.get_name()}, Price: {medicine.get_price()}, Description: {medicine.get_description()}")
+        
+        try:
+            medicine_choice = int(input("Enter the number of the medicine to buy: ")) - 1
+            quantity = int(input("Enter the quantity to purchase: "))
+            return medicine_choice, quantity
+        except ValueError:
+            print("Invalid input. Please enter valid numbers.")
+            return None, None  

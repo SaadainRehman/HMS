@@ -8,6 +8,8 @@ from DL.MedicineDL import MedicineDL
 from BL.patient import Patient
 from DL.Nurse import NurseDL
 from DL.PharmacistDL import PharmacistDL
+from BL.Nurse import Nurse
+from BL.Pharmacist import Pharmacist
 
 def main():
     user_dl = UserDL()
@@ -16,18 +18,53 @@ def main():
     doctor_dl = DoctorDL()
     medicine_dl = MedicineDL()
     patient = Patient()
+    doctor = Doctor(
+    name="Dr. Ali Khan",
+    shift="Morning",
+    address="Gulberg, Lahore",
+    phone="0301-1234567",
+    salary=150000,
+    cnic="35201-1234567-8",
+    specialization="Cardiology",
+    experience=15,
+    availability="9 AM - 3 PM",
+    department="Cardiology"
+)
+    nurse = Nurse(
+    name="Nurse Sara",
+    shift="Morning",
+    address="Model Town, Lahore",
+    phone="0312-9876543",
+    salary=60000,
+    cnic="35202-9876543-9",
+    specialization="ICU",
+    department="Intensive Care Unit"
+)
+    pharmacist = Pharmacist(
+    name="Pharmacist Muneeb",
+    shift="Morning",
+    address="PECHS, Karachi",
+    phone="0345-2345678",
+    salary=80000,
+    cnic="42101-2345678-5",
+    department="Pharmacy"
+)
 
     while True:
         choice = menu.main_menu()
 
         if choice == "1":
             username, password = menu.get_user_credentials()
-            success = user_logic.sign_up(username, password)
-            if success:
-                menu.display_message("Sign-up successful! Welcome to the system.")
+            
+            if len(password) != 5 or not password.isdigit():
+                menu.display_message("Password must be exactly 5 digits. Please try again.")
+            elif user_logic.user_dl.get_user(username) is not None:
+                menu.display_message("Username already exists. Please choose a different username.")
             else:
-                print("Username already exists. Please try again.")
-        
+                success = user_logic.sign_up(username, password)
+                if success:
+                    menu.display_message("Sign-up successful! Welcome to the system.")
+                    
         elif choice == "2":
             username, password = menu.get_user_credentials()
             if user_logic.sign_in(username, password):
@@ -54,11 +91,15 @@ def main():
                 while True:
                     doctor_choice = menu.doctor_menu()
                     if doctor_choice == "1":
-                        print("Viewing patients...")
+                        print(doctor.view_assigned_patients())
                     elif doctor_choice == "2":
-                        print("Updating patient records...")
+                        patient_index, updated_condition = menu.get_patient_record_update()  # Get input via UserMenu
+                        if patient_index == -1 or updated_condition is None:
+                            print("Failed to update patient records due to invalid input.")
+                        else:
+                            print(doctor.update_patient_records(patient_index, updated_condition))  # Update records
                     elif doctor_choice == "3":
-                        print("Viewing Schedule")
+                        print(doctor.view_schedule())
                     elif doctor_choice == "4":
                         print("Logging out...")
                         break
@@ -70,11 +111,13 @@ def main():
                 while True:
                     pharmacist_choice = menu.pharmacist_menu()
                     if pharmacist_choice == "1":
-                        print("Viewing medicine stock...")
-                        # Add functionality to view stock
+                        print(pharmacist.view_medicine_stock())
                     elif pharmacist_choice == "2":
-                        print("Dispensing medicine...")
-                        # Add functionality to dispense medicine
+                        medicine_name, quantity = menu.get_dispense_medicine_details() 
+                        if medicine_name is None or quantity is None:
+                            print("Failed to dispense medicine due to invalid input.")
+                        else:
+                            print(pharmacist.dispense_medicine(medicine_name, quantity))
                     elif pharmacist_choice == "3":
                         print("Logging out...")
                         break
@@ -86,11 +129,15 @@ def main():
                 while True:
                     nurse_choice = menu.nurse_menu()
                     if nurse_choice == "1":
-                        print("Assisting doctor...")
+                        print(nurse.assist_doctor())
                     elif nurse_choice == "2":
-                        print("Checking vitals...")
+                        print(nurse.view_tasks())
                     elif nurse_choice == "3":
-                        print("Administering medicine...")
+                        task_index = nurse.task_index()
+                        if task_index == -1:
+                            print("Invalid input. Please enter a valid task number.")
+                        else:
+                            print(nurse.perform_task(task_index)) 
                     elif nurse_choice == "4":
                         print("Logging out...")
                         break
