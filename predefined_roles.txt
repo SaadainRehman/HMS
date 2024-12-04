@@ -1,0 +1,7 @@
+doctors,Ali,78978
+doctors,Saqlain,78676
+doctors,Ahmad,11111
+nurses,waqar,24763
+nurses,hassan,99999
+pharmacists,muneeb,12871
+pharmacists,shehzad,23487

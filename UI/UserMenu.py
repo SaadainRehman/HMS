@@ -59,13 +59,13 @@ class Menu:
         return choice
 
 
-    def display_doctors(self, doctors):
-        if not doctors:
-            print("No doctors are available at the moment.")
-        else:
-            print("\n--- Available Doctors ---")
-            for doctor in doctors:
-                print(doctor)
+    # def display_doctors(self, doctors):
+    #     if not doctors:
+    #         print("No doctors are available at the moment.")
+    #     else:
+    #         print("\n--- Available Doctors ---")
+    #         for doctor in doctors:
+    #             print(doctor)
 
     def nurse_menu(self):
         print("\n--- Nurse Menu ---")
