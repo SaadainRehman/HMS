@@ -42,3 +42,4 @@ class Nurse(Staff):
     def __str__(self):
         base_info = super().__str__()
         return f"{base_info}, Specialization: {self._specialization}, Department: {self._department}"
+    

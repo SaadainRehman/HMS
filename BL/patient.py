@@ -71,9 +71,15 @@ class Patient:
             if medicine_name.lower() == "done":
                 break
 
-            # Check if the medicine exists in the list
-            selected_medicine = next((m for m in medicines if m.get_name().lower() == medicine_name.lower()), None)
+            # selected_medicine = next((m for m in medicines if m.get_name().lower() == medicine_name.lower()), None)
+            selected_medicine = None 
+            for medicine in medicines:
+                if medicine.get_name().lower() == medicine_name.lower():
+                    selected_medicine = medicine 
+                    break  
+
             if not selected_medicine:
+
                 print("Medicine not found. Please try again.")
                 continue
 

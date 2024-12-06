@@ -24,11 +24,11 @@ class UserDL:
             self.save_predefined_roles(roles)
         return roles
 
-    def save_predefined_roles(self, roles):
-        with open(self.predefined_roles_file, "w") as file:
-            for role, users in roles.items():
-                for username, password in users.items():
-                    file.write(f"{role},{username},{password}\n")
+    # def save_predefined_roles(self, roles):
+    #     with open(self.predefined_roles_file, "w") as file:
+    #         for role, users in roles.items():
+    #             for username, password in users.items():
+    #                 file.write(f"{role},{username},{password}\n")
 
     def load_patients(self):
         patients = []

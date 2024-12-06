@@ -64,6 +64,6 @@ class UserManager:
                 # print(f"DEBUG: Matched patient password for username: {username}")
                 return "patient"  # Return "patient" for patient users
 
-        print("DEBUG: Failed to authenticate user.")
+        # print("DEBUG: Failed to authenticate user.")
         return None
 
